@@ -17,12 +17,22 @@
   // checking for IE8 or above
   function isInternetExplorer() {
     var rv = -1; // Return value assumes failure.
+    var ua = navigator.userAgent;
+    // IE <= 10
     if (navigator.appName === 'Microsoft Internet Explorer') {
-      var ua = navigator.userAgent;
       var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
       if (re.exec(ua) != null)
         rv = parseFloat(RegExp.$1);
     }
+    // IE >= 11
+    else if (ua.indexOf("Trident") > -1) {
+      var re = new RegExp("rv:([0-9]{2,}[\.0-9]{0,})");
+      if (re.exec(ua) !== null) {
+        rv = parseFloat(RegExp.$1);
+      }
+    }
+
+    console.log("IE version: " + rv);
     return rv >= 8;
   }
 
@@ -201,6 +211,11 @@
       },
       onOpen: function(cb) {
         var o = "*";
+        var self = this;
+        if (!window.opener && isIE) return setTimeout(function() {
+          console.log("can't find window.opener");
+          self.onOpen(cb);
+        }, 500);
         var msgTarget = isIE ? findRelay() : window.opener;
         if (!msgTarget) throw "can't find relay frame";
         function doPost(msg) {

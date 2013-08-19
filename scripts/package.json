@@ -1,0 +1,18 @@
+{
+  "author": "Lloyd Hilaiel <lloyd@hilaiel.com> (http://lloyd.io)",
+  "contributors": [
+    "Shane Tomlinson <stomlinson@mozilla.com> (https://shanetomlinson.com)"
+  ],
+  "name": "winchan_tests",
+  "description": "WinChan tests",
+  "version": "0.0.1",
+  "main": "./run_example",
+  "dependencies": {
+    "express": "*",
+    "connect-postprocess": "git://github.com/shane-tomlinson/connect-postprocess.git#99673450ae1c5c361a5ef8d095c9753c939cedd0"
+  },
+  "scripts": {
+    "start": "node ./run_example.js"
+  }
+}
+

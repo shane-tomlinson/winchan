@@ -5,8 +5,11 @@
 <body>
 <p>hi!  This is a dialog that is was opened by <b><span id="who">...</span></b>.</p>
 
-<p>Here are its parameters:</p>
-<pre>
+<h2>Here are its parameters:</h2>
+<pre class="parameters">
+</pre>
+<h2>typeof window.opener:</h2>
+<pre class="opener">
 </pre>
 <button id="nav_away">navigate away</button>
 <button id="close">close</button>
@@ -15,9 +18,11 @@
 <script src="jquery.js"></script>
 <script>
 
+$(".opener").text(typeof window.opener);
+
 var wc = WinChan.onOpen(function(origin, r, cb) {
   $("#who").text(origin);
-  $("pre").text(JSON.stringify(r, null, "    "));
+  $(".parameters").text(JSON.stringify(r, null, "    "));
 
   $("button#close").click(function() {
     cb({
